@@ -1,6 +1,7 @@
 package main
 
 import (
+	"pocketbase/collections"
 	"pocketbase/config"
 	"pocketbase/flags"
 	"pocketbase/superuser"
@@ -28,6 +29,8 @@ func main() {
 		klog.SetWithCallerInfo(config.Get().Log.WithCallerInfo)
 		klog.Info("config", "", config.Get())
 	}
+
+	collections.Upsert(app)
 
 	if err := app.Start(); err != nil {
 		klog.ErrorS(err, "")
