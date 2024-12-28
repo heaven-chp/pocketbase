@@ -1,31 +1,28 @@
 package main
 
 import (
+	"pocketbase/config"
+	"pocketbase/flag"
+
+	"github.com/common-library/go/log/klog"
 	"github.com/pocketbase/pocketbase"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/migrations"
-	"k8s.io/klog/v2"
 )
 
-func init() {
-	migrations.Register(func(app core.App) error {
-		superusers, err := app.FindCachedCollectionByNameOrId(core.CollectionNameSuperusers)
-		if err != nil {
-			return err
-		}
-
-		record := core.NewRecord(superusers)
-		record.Set("email", "admin@test.com")
-		record.Set("password", "admin123")
-
-		return app.Save(record)
-	}, func(app core.App) error {
-		return nil
-	})
-}
-
 func main() {
+	defer klog.Flush()
+
 	app := pocketbase.New()
+
+	if err := flag.Parse(app); err != nil {
+		klog.ErrorS(err, "")
+		return
+	} else if err := config.Read(flag.Get().ConfigFile); err != nil {
+		klog.ErrorS(err, "")
+		return
+	} else {
+		klog.SetWithCallerInfo(config.Get().Log.WithCallerInfo)
+		klog.Info("config", "", config.Get())
+	}
 
 	if err := app.Start(); err != nil {
 		klog.ErrorS(err, "")
