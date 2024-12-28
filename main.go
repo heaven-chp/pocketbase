@@ -3,10 +3,15 @@ package main
 import (
 	"pocketbase/config"
 	"pocketbase/flag"
+	"pocketbase/superuser"
 
 	"github.com/common-library/go/log/klog"
 	"github.com/pocketbase/pocketbase"
 )
+
+func init() {
+	superuser.Create("admin@admin.com", "admin123")
+}
 
 func main() {
 	defer klog.Flush()
