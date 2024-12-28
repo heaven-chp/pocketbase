@@ -1,8 +1,8 @@
-package flag_test
+package flags_test
 
 import (
 	"os"
-	"pocketbase/flag"
+	"pocketbase/flags"
 	"testing"
 
 	"github.com/pocketbase/pocketbase"
@@ -16,7 +16,7 @@ func TestParse(t *testing.T) {
 
 	app := pocketbase.New()
 
-	if err := flag.Parse(app); err != nil {
+	if err := flags.Parse(app); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -24,7 +24,7 @@ func TestParse(t *testing.T) {
 func TestGet(t *testing.T) {
 	TestParse(t)
 
-	if flag.Get().ConfigFile != "./config/config.json" {
-		t.Fatal(flag.Get().ConfigFile)
+	if flags.Get().ConfigFile != "./config/config.json" {
+		t.Fatal(flags.Get().ConfigFile)
 	}
 }

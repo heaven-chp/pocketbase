@@ -2,7 +2,7 @@ package main
 
 import (
 	"pocketbase/config"
-	"pocketbase/flag"
+	"pocketbase/flags"
 	"pocketbase/superuser"
 
 	"github.com/common-library/go/log/klog"
@@ -18,10 +18,10 @@ func main() {
 
 	app := pocketbase.New()
 
-	if err := flag.Parse(app); err != nil {
+	if err := flags.Parse(app); err != nil {
 		klog.ErrorS(err, "")
 		return
-	} else if err := config.Read(flag.Get().ConfigFile); err != nil {
+	} else if err := config.Read(flags.Get().ConfigFile); err != nil {
 		klog.ErrorS(err, "")
 		return
 	} else {
