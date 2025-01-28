@@ -4,14 +4,10 @@ import (
 	"pocketbase/collections"
 	"pocketbase/config"
 	"pocketbase/flags"
-	"pocketbase/superuser"
+	_ "pocketbase/migrations"
 
 	"github.com/pocketbase/pocketbase"
 )
-
-func init() {
-	superuser.Create("admin@admin.com", "admin123")
-}
 
 func main() {
 	app := pocketbase.New()
