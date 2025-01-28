@@ -6,7 +6,6 @@ import (
 	"pocketbase/flags"
 	"pocketbase/superuser"
 
-	"github.com/common-library/go/log/klog"
 	"github.com/pocketbase/pocketbase"
 )
 
@@ -15,24 +14,21 @@ func init() {
 }
 
 func main() {
-	defer klog.Flush()
-
 	app := pocketbase.New()
 
 	if err := flags.Parse(app); err != nil {
-		klog.ErrorS(err, "")
+		app.Logger().Error("flags.Parse error", "error", err)
 		return
 	} else if err := config.Read(flags.Get().ConfigFile); err != nil {
-		klog.ErrorS(err, "")
+		app.Logger().Error("config.Read error", "file", flags.Get().ConfigFile, "error", err)
 		return
 	} else {
-		klog.SetWithCallerInfo(config.Get().Log.WithCallerInfo)
-		klog.Info("config", "", config.Get())
+		app.Logger().Info("config", "", config.Get())
 	}
 
 	collections.Upsert(app)
 
 	if err := app.Start(); err != nil {
-		klog.ErrorS(err, "")
+		app.Logger().Error("app.Start error", "error", err)
 	}
 }

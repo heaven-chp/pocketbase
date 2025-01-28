@@ -13,8 +13,4 @@ func TestRead(t *testing.T) {
 
 func TestGet(t *testing.T) {
 	TestRead(t)
-
-	if config.Get().Log.WithCallerInfo != false {
-		t.Fatal(config.Get().Log.WithCallerInfo)
-	}
 }
