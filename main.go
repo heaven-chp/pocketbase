@@ -23,6 +23,7 @@ func main() {
 	}
 
 	collections.Upsert(app)
+	collections.Cron(app)
 
 	if err := app.Start(); err != nil {
 		app.Logger().Error("app.Start error", "error", err)
