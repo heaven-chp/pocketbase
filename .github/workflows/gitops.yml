@@ -38,6 +38,7 @@ jobs:
         run: go tool cover -html=./coverage.out -o ./coverage.html
 
   image:
+    needs: code
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
