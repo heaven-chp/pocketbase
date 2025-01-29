@@ -5,6 +5,7 @@ import (
 	"pocketbase/config"
 	"pocketbase/flags"
 	_ "pocketbase/migrations"
+	"pocketbase/routing"
 
 	"github.com/pocketbase/pocketbase"
 )
@@ -24,6 +25,7 @@ func main() {
 
 	collections.Upsert(app)
 	collections.Cron(app)
+	routing.Register(app)
 
 	if err := app.Start(); err != nil {
 		app.Logger().Error("app.Start error", "error", err)
