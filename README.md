@@ -10,7 +10,9 @@
 - initial superuser
   - `admin@admin.com`/`admin123`
 - UI
-  - `ip:port/_/`
+  - `ip:8090/_/`
+- API
+  - `ip:8090/api/`
 - How to create a new collection
   1. Define a new schema by referencing the sample schema(`collections/schemas/sample.go`)
   2. Adding a new schema to the Get function(`collections/schemas/schemas.go`)
