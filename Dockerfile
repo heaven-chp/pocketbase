@@ -1,4 +1,4 @@
-FROM golang:1.23.5 AS build
+FROM golang:1.24.2 AS build
 WORKDIR /work
 ENV CGO_ENABLED=0
 RUN go env -w GOCACHE=/go-cache
