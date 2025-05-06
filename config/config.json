@@ -1,0 +1,11 @@
+{
+    "collections": {
+        "retention": [
+            {
+                "name": "sample",
+                "days": 10,
+                "expression": "@daily"
+            }
+        ]
+    }
+}
